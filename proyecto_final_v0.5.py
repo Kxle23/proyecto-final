@@ -15,6 +15,13 @@ import shutil
 import os
 import sys
 from datetime import datetime
+import os
+
+#Obtiene la ruta de trabajo
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+def ruta(relativa):
+    return os.path.join(BASE_DIR, relativa)
+
 
 #Creamos una clase para la ventana principal
 class FileOrganizer(QMainWindow):
@@ -22,7 +29,7 @@ class FileOrganizer(QMainWindow):
         super().__init__()
         self.setWindowTitle("OrgaFile")
         self.setGeometry(100, 100, 700, 500)
-        self.window_icon = QPixmap("assets/window_icon.png")
+        self.window_icon = QPixmap(ruta("assets/window_icon.png"))
         self.setWindowIcon(self.window_icon)
 
         #Estilos avanzados con colores y bordes redondeados
@@ -51,7 +58,7 @@ class FileOrganizer(QMainWindow):
 
         #Imagen (icono centrado) con QPixmap
         self.header_label = QLabel()
-        pixmap = QPixmap("assets/orgafile.png")  #Se carga una imagen para mostrar arriba
+        pixmap = QPixmap(ruta("assets/orgafile.png"))  #Se carga una imagen para mostrar arriba
         if not pixmap.isNull():
             pixmap = pixmap.scaled(pixmap.width()/10, pixmap.height()/10, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.header_label.setPixmap(pixmap)
@@ -68,7 +75,7 @@ class FileOrganizer(QMainWindow):
 
         #Botón con icono
         self.browse_button = QPushButton()
-        self.browse_button.setIcon(QIcon("assets/search_icon.png"))  #QIcon con imagen
+        self.browse_button.setIcon(QIcon(ruta("assets/search_icon.png")))  #QIcon con imagen
         self.browse_button.setStyleSheet("background-color: #88C0D0; border-radius: 5px; padding: 5px;")
         self.browse_button.clicked.connect(self.browse_folder)
 
